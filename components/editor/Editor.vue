@@ -21,7 +21,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import PreviewComponents from "~/components/editor/PreviewComponents.vue";
-import * as Sass from "sass.js/dist/sass"; // Импорт Sass.js для браузера
+import Sass from "sass.js"; // Обновленный импорт Sass.js
 
 const isClient = ref(false); // Проверяем, выполняется ли код на клиенте
 
@@ -64,12 +64,12 @@ function updatePreviewCss() {
   if (!editorValue.value) return; // Если редактор пустой, ничего не делаем
 
   // Компилируем SCSS с помощью Sass.js
-  Sass.compile(editorValue.value, (result) => {
-    if (result.status === 0) {
-      compiledCss.value = result.text; // Сохраняем скомпилированный CSS
+  Sass.compile(editorValue.value, (callbackResult) => {
+    if (callbackResult.status === 0) {
+      compiledCss.value = callbackResult.text; // Сохраняем скомпилированный CSS
       console.log("Скомпилированный CSS:", compiledCss.value); // Для отладки
     } else {
-      console.error("Ошибка компиляции SCSS:", result.formatted);
+      console.error("Ошибка компиляции SCSS:", callbackResult.formatted);
     }
   });
 }
