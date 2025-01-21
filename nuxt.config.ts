@@ -11,5 +11,5 @@ export default defineNuxtConfig({
     transpile: ['quasar']
   },
 
-  modules: ['nuxt-quasar-ui']
+  modules: ['nuxt-quasar-ui','@pinia/nuxt']
 })
