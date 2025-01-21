@@ -92,6 +92,9 @@ function updatePreviewCss() {
       console.log("Классы CSS:", store.classes); // Для отладки
 
       store.css = compiledCss.value;
+      store.updateCode();
+      const { components } = storeToRefs(store);
+      console.log(components.value);
     } else {
       console.error("Ошибка компиляции SCSS:", callbackResult.formatted);
     }

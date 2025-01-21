@@ -5,7 +5,7 @@ const STORE_NAME = 'editor'
 export const useEditorStore = defineStore(STORE_NAME, () => {
 
 
-    const components = [
+    const components = ref([
         {
             id: 0,
             type: 'block',
@@ -17,16 +17,10 @@ export const useEditorStore = defineStore(STORE_NAME, () => {
                 '}',
         },
         {
-            id: 1,
             type: 'string',
             content: 'Тестовая строка',
-            style: '.string {\n' +
-                '  background-color: #000;\n' +
-                '  text-align: center;\n' +
-                '  color: blue;\n' +
-                '}',
         }
-    ];
+    ]);
 
     const code = `
 .test {
@@ -38,5 +32,12 @@ export const useEditorStore = defineStore(STORE_NAME, () => {
 
     const classes = [];
 
-    return {components, code, css, classes}
+    function updateCode() {
+        classes.forEach((item, index) => {
+            console.log(index, item);
+            components[index] = {type: item, content: 'ТЕКСТ'};
+        })
+    }
+
+    return {components, code, css, classes, updateCode}
 })
